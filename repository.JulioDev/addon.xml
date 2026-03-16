@@ -1,22 +1,21 @@
 <addon id="repository.JulioDev"
-       name="JulioDev Repository"
-       version="1.0.0"
-       provider-name="JulioDev">
+    name="JulioDev Repository"
+    version="1.0.0"
+    provider-name="JulioDev">
 
     <extension point="xbmc.addon.repository">
 
         <info compressed="false">
-            https://raw.githubusercontent.com/JulioDev00/KodiRepo/main/addons.xml
+            https://juliodev00.github.io/KodiRepo/addons.xml
         </info>
 
         <checksum>
-            https://raw.githubusercontent.com/JulioDev00/KodiRepo/main/addons.xml.md5
+            https://juliodev00.github.io/KodiRepo/addons.xml.md5
         </checksum>
 
         <datadir zip="true">
-            https://raw.githubusercontent.com/JulioDev00/KodiRepo/main/zips/
+            https://juliodev00.github.io/KodiRepo/zips/
         </datadir>
-
     </extension>
 
 </addon>
