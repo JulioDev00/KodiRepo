@@ -1,0 +1,12 @@
+<addons>
+
+<addon id="script.multi-user.management"
+       name="Multi User Management"
+       version="1.0.0"
+       provider-name="JulioDev">
+
+    <extension point="xbmc.service" library="service.py"/>
+
+</addon>
+
+</addons>
