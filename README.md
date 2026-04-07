@@ -147,7 +147,7 @@ Mismo proceso que al actualizar (pasos 4 y 5 de arriba).
 
 ## Instalar el repoitorio
 ```
-    https://github.com/JulioDev00/KodiRepo
+    https://juliodev00.github.io/KodiRepo
 ```
 ## Notas técnicas
 
