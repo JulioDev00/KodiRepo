@@ -1,12 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <addons>
-
-<addon id="script.multi-user.management"
-       name="Multi User Management"
-       version="1.0.0"
-       provider-name="JulioDev">
-
-    <extension point="xbmc.service" library="service.py"/>
-
-</addon>
-
+  <addon id="script.multi-user.management"
+         name="Multi User Management"
+         version="1.0.0"
+         provider-name="JulioDev">
+    <requires>
+      <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+      <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" start="startup"/>
+    <extension point="xbmc.addon.metadata">
+      <summary>Selector multiusuario + inyección de settings</summary>
+      <platform>all</platform>
+      <assets>
+        <icon>icon.png</icon>
+      </assets>
+    </extension>
+  </addon>
 </addons>
