@@ -10,10 +10,15 @@ Repositorio de addons para Kodi. Permite instalar y actualizar addons directamen
 KodiRepo/
 ├── addons.xml                        → Lista de addons disponibles
 ├── addons.xml.md5.txt                → Checksum para verificación
+├── index.html                        → Página web del repositorio
+├── README.md                         → Este archivo
 ├── repository.JulioDev-1.0.0.zip    → ZIP para instalar el repositorio en Kodi
+├── repository.JulioDev/
+│   └── addon.xml                     → Definición del repositorio (URLs)
 └── zips/
     └── script.multi-user.management/
-        └── script.multi-user.management-1.0.0.zip
+        ├── script.multi-user.management-1.0.0.zip
+        └── icon.png                  → Icono del addon
 ```
 
 ---
@@ -83,7 +88,7 @@ Cambia la versión en el `addons.xml` de la raíz:
 
 ### 4. Regenera el MD5
 
-Abre PowerShell en la raíz del repo y ejecuta:
+Abre PowerShell en la raíz local del repo y ejecuta:
 
 ```powershell
 Get-FileHash addons.xml -Algorithm MD5 | Select-Object -ExpandProperty Hash | Out-File addons.xml.md5.txt -Encoding ASCII -NoNewline
@@ -116,9 +121,10 @@ mi-nuevo-addon/
 
 ### 2. Crea el ZIP
 
-- Comprime la carpeta entera
+- Comprime la carpeta entera (no los archivos sueltos)
 - Nómbralo: `mi-nuevo-addon-1.0.0.zip`
 - Súbelo a: `zips/mi-nuevo-addon/`
+- Sube también el `icon.png` suelto en esa misma carpeta
 
 ### 3. Añádelo al `addons.xml`
 
@@ -135,6 +141,9 @@ Agrega una entrada dentro de `<addons>`:
   <extension point="xbmc.addon.metadata">
     <summary>Descripción del addon</summary>
     <platform>all</platform>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
   </extension>
 </addon>
 ```
@@ -145,12 +154,10 @@ Mismo proceso que al actualizar (pasos 4 y 5 de arriba).
 
 ---
 
-## Instalar el repoitorio
-```
-    https://juliodev00.github.io/KodiRepo
-```
 ## Notas técnicas
 
 - El repositorio usa **GitHub Pages** para servir los archivos
 - Compatible con **Kodi 19 (Matrix), 20 (Nexus) y 21 (Omega)**
 - El archivo `addons.xml.md5.txt` debe estar sincronizado con `addons.xml` — si no coinciden Kodi no conecta
+- Cada addon necesita su `icon.png` suelto en `zips/nombre-addon/` además de dentro del ZIP
+- El ZIP del addon debe contener una carpeta con el mismo nombre que el id del addon
