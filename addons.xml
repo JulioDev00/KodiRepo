@@ -2,15 +2,19 @@
 <addons>
   <addon id="script.multi-user.management"
          name="Multi User Management"
-         version="1.0.1"
-         provider-name="JulioDev">
+         version="1.0.3"
+         provider-name="MultiUser">
+
     <requires>
       <import addon="xbmc.python" version="3.0.0"/>
     </requires>
+
     <extension point="xbmc.python.script" library="default.py">
       <provides>executable</provides>
     </extension>
-    <extension point="xbmc.service" library="service.py" start="startup"/>
+
+    <extension point="xbmc.service" library="service.py" start="startup" />
+
     <extension point="xbmc.addon.metadata">
       <summary>Gestión de múltiples cuentas de Trakt mediante tokens</summary>
       <platform>all</platform>
@@ -18,5 +22,6 @@
         <icon>icon.png</icon>
       </assets>
     </extension>
+
   </addon>
 </addons>
