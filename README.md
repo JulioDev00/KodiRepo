@@ -12,12 +12,18 @@ KodiRepo/
 ├── addons.xml.md5.txt                → Checksum para verificación
 ├── index.html                        → Página web del repositorio
 ├── README.md                         → Este archivo
-├── repository.JulioDev-1.0.0.zip    → ZIP para instalar el repositorio en Kodi
+├── .gitattributes                    → Fuerza LF (imprescindible para el MD5)
+├── repository.JulioDev-1.0.0.zip     → ZIP para instalar el repositorio en Kodi
 ├── repository.JulioDev/
 │   └── addon.xml                     → Definición del repositorio (URLs)
 └── zips/
+    ├── repository.JulioDev/
+    │   └── repository.JulioDev-1.0.0.zip   → Permite que Kodi actualice el repo
     └── script.multi-user.management/
         ├── script.multi-user.management-1.0.0.zip
+        ├── script.multi-user.management-1.0.1.zip
+        ├── script.multi-user.management-1.0.3.zip
+        ├── script.multi-user.management-1.0.4.zip
         └── icon.png                  → Icono del addon
 ```
 
@@ -54,7 +60,8 @@ KodiRepo/
 
 | Addon | ID | Versión | Descripción |
 |---|---|---|---|
-| Multi User Management | `script.multi-user.management` | 1.0.0 | Gestión multiusuario con tokens de Trakt.tv |
+| Multi User Management | `script.multi-user.management` | 1.0.4 | Gestión multiusuario con tokens de Trakt.tv |
+| JulioDev Repository | `repository.JulioDev` | 1.0.0 | El propio repositorio (se autoactualiza) |
 
 ---
 
@@ -88,10 +95,21 @@ Cambia la versión en el `addons.xml` de la raíz:
 
 ### 4. Regenera el MD5
 
+> **Importante:** el MD5 debe calcularse sobre el archivo con finales de línea **LF**,
+> que es exactamente lo que sirve GitHub Pages. El archivo `.gitattributes` de este
+> repo ya fuerza LF en `addons.xml`, así que basta con no revertirlo. Si alguna vez
+> el archivo acaba en CRLF, el hash saldrá distinto y **Kodi rechazará el repositorio entero**.
+
 Abre PowerShell en la raíz local del repo y ejecuta:
 
 ```powershell
 Get-FileHash addons.xml -Algorithm MD5 | Select-Object -ExpandProperty Hash | Out-File addons.xml.md5.txt -Encoding ASCII -NoNewline
+```
+
+Comprueba que `addons.xml` está en LF antes de generarlo:
+
+```powershell
+if ((Get-Content -Raw addons.xml) -match "`r`n") { "ERROR: CRLF detectado" } else { "OK: LF" }
 ```
 
 ### 5. Sube los cambios a GitHub
@@ -161,3 +179,10 @@ Mismo proceso que al actualizar (pasos 4 y 5 de arriba).
 - El archivo `addons.xml.md5.txt` debe estar sincronizado con `addons.xml` — si no coinciden Kodi no conecta
 - Cada addon necesita su `icon.png` suelto en `zips/nombre-addon/` además de dentro del ZIP
 - El ZIP del addon debe contener una carpeta con el mismo nombre que el id del addon
+- `.gitattributes` fuerza LF en `addons.xml`: con `core.autocrlf=true` el archivo en
+  disco tendría CRLF y el MD5 generado en local **no** coincidiría con el publicado
+- El repositorio se lista a sí mismo en `addons.xml` y tiene su ZIP en
+  `zips/repository.JulioDev/`, de modo que Kodi puede actualizarlo solo. Si subes una
+  versión nueva del repositorio, actualiza ambos sitios
+- El rango `minversion="19.0.0" maxversion="21.99.99"` del `addon.xml` del repositorio
+  excluye Kodi 22; hay que ampliarlo cuando salga

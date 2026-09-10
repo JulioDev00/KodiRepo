@@ -1,0 +1,14 @@
+# Kodi lee estos archivos byte a byte y valida el MD5 de addons.xml.
+# Forzamos LF para que el archivo en disco sea IDENTICO al que sirve
+# GitHub Pages; con core.autocrlf=true, si no, el MD5 generado en local
+# no coincide con el publicado y Kodi rechaza el repositorio entero.
+addons.xml          text eol=lf
+addons.xml.md5.txt  text eol=lf
+index.html          text eol=lf
+README.md           text eol=lf
+*.xml               text eol=lf
+
+# Binarios: nunca tocar
+*.zip binary
+*.png binary
+*.jpg binary
