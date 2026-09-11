@@ -10,10 +10,10 @@ Repositorio de addons para Kodi. Permite instalar y actualizar addons directamen
 KodiRepo/
 ├── addons.xml                        → Lista de addons disponibles
 ├── addons.xml.md5.txt                → Checksum para verificación
-├── index.html                        → Página web del repositorio
+├── index.html                        → Página web y listado que navega Kodi (generado)
 ├── README.md                         → Este archivo
 ├── .gitattributes                    → Fuerza LF (imprescindible para el MD5)
-├── repository.JulioDev-1.0.0.zip     → ZIP para instalar el repositorio en Kodi
+├── repository.JulioDev-1.0.0.zip     → Copia suelta del ZIP del repositorio (ver nota)
 ├── repository.JulioDev/
 │   └── addon.xml                     → Definición del repositorio (URLs)
 └── zips/
@@ -45,7 +45,8 @@ KodiRepo/
 
 1. Kodi → **Complementos** → icono de caja (instalar desde ZIP)
 2. Selecciona la fuente `JulioDev`
-3. Selecciona `repository.JulioDev-1.0.0.zip`
+3. Selecciona `repository.JulioDev-1.0.0.zip` — es el que enlaza el `index.html`,
+   servido desde `zips/repository.JulioDev/`
 4. Espera el mensaje **"Complemento instalado"**
 
 ### Paso 3 — Instalar el addon
@@ -186,3 +187,11 @@ Mismo proceso que al actualizar (pasos 4 y 5 de arriba).
   versión nueva del repositorio, actualiza ambos sitios
 - El rango `minversion="19.0.0" maxversion="21.99.99"` del `addon.xml` del repositorio
   excluye Kodi 22; hay que ampliarlo cuando salga
+- `index.html` **no es solo para humanos**: GitHub Pages no genera listados de
+  directorio, asi que al añadir la URL como fuente Kodi lista los `<a href>` de esa
+  página. Lo genera `build_addons_xml.py` (en el repo del addon) a partir del mismo
+  escaneo de `zips/` que el índice, con anclas planas y rutas relativas. No lo edites
+  a mano ni le metas enlaces montados con JavaScript: se rompe la instalación manual
+- El `repository.JulioDev-1.0.0.zip` de la raíz es una copia suelta que queda para
+  quien tenga el enlace viejo. El `index.html` generado ya no lo enlaza: apunta al de
+  `zips/repository.JulioDev/`, que es el que se indexa y el que Kodi actualiza solo
