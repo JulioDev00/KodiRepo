@@ -21,7 +21,7 @@
   </addon>
   <addon id="script.multi-user.management"
          name="Multi User Management"
-         version="1.0.5"
+         version="1.0.6"
          provider-name="MultiUser">
 
     <requires>
